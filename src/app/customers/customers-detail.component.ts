@@ -6,7 +6,7 @@ import { Customer,
 
 @Component({
   template: `
-    <h3 highlight>Customer Detail</h3>
+    <h3>Customer Detail</h3>
     <div *ngIf="customer">
       <div>Id: {{customer.id}}</div><br>
       <label>Name:

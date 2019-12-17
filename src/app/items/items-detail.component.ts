@@ -6,7 +6,7 @@ import { Item,
 
 @Component({
   template: `
-    <h3 highlight>Item Detail</h3>
+    <h3>Item Detail</h3>
     <div>Item id: {{id}}</div>
     <br>
     <a routerLink="../list">Items List</a>

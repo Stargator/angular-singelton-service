@@ -6,7 +6,7 @@ import { Customer,
 
 @Component({
   template: `
-    <h3 highlight>Customer List</h3>
+    <h3>Customer List</h3>
     <div *ngFor='let customer of customers | async'>
       <a routerLink="{{customer.id}}">{{customer.id}} - {{customer.name}}</a>
     </div>

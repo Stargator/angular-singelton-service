@@ -15,6 +15,7 @@ export class UserService {
   private _userName = 'Sherlock Holmes';
 
   constructor(@Optional() config: UserServiceConfig) {
+    console.log("userService created");
     if (config) { this._userName = config.userName; }
   }
 
