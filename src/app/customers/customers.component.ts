@@ -6,14 +6,23 @@ import { UserService } from '../greeting/user.service';
 @Component({
   template: `
     <h2>Customers of {{userName}}</h2>
+    <button type="button" class="btn" (click)="sendMessage()">
+    Send Message</button>
+
     <router-outlet></router-outlet>
   `,
   // providers: [ UserService ]
 })
 export class CustomersComponent {
   userName = '';
-  constructor(userService: UserService) {
+
+  constructor(private userService: UserService) {
     this.userName = userService.userName;
+  }
+
+  sendMessage(): void {
+    console.log('message sent');
+    this.userService.broadcast('testCall', 'Special Message', 'double', 'trouble');
   }
 }
 

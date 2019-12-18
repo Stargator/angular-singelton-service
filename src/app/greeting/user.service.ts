@@ -1,5 +1,5 @@
-
 import { Injectable, Optional } from '@angular/core';
+import { from, Subject } from 'rxjs';
 
 let nextId = 1;
 
@@ -13,19 +13,61 @@ export class UserServiceConfig {
 export class UserService {
   id = nextId++;
   private _userName = 'Sherlock Holmes';
+  listeners: any; // In usage, think of it as a Map of type <string, Function>.
+  eventsSubject: any;
+  events: any;
 
   constructor(@Optional() config: UserServiceConfig) {
-    console.log('UserService instance created.');
     if (config) { this._userName = config.userName; }
+
+    this.listeners = {};
+    this.eventsSubject = new Subject();
+
+    this.events = from(this.eventsSubject);
+
+    this.events.subscribe(
+        // @ts-ignore
+        ({name, args}) => {
+          if (this.listeners[name]) {
+              console.log('name => ', name);
+            // for (let listener of this.listeners[name]) {
+              this.listeners[name](...args);
+              console.log('args => ', ...args);
+              // listener();
+            // }
+          }
+        });
   }
 
   get userName() {
     // Demo: add a suffix if this service has been created more than once
-    console.log("Sending user info");
     const suffix = this.id > 1 ? ` times ${this.id}` : '';
     return this._userName + suffix;
   }
+
+  on(name: string, listener: any): void {
+    console.log('subscribed');
+    if (!this.listeners[name]) {
+      this.listeners[name] = null;
+    }
+
+    this.listeners[name] = listener;
+  }
+
+  off(name: string, listener: any): void {
+    // @ts-ignore
+    this.listeners[name] = this.listeners[name].filter(x => x != listener);
+  }
+
+  broadcast(name: string, ...args): void {
+    console.log('broadcast called: ', ...args);
+    this.eventsSubject.next({ // TODO verify this will work as is
+      name,
+      args
+    });
+  }
 }
+
 
 
 /*

@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit {
     name: ['', Validators.required]
   });
 
-  constructor(private contactService: ContactService, userService: UserService, private fb: FormBuilder) {
+  constructor(private contactService: ContactService, private userService: UserService, private fb: FormBuilder) {
     console.log("Contact -> " + userService.userName);
     this.userName = userService.userName;
   }
@@ -58,6 +58,10 @@ export class ContactComponent implements OnInit {
     this.contact = {id: 42, name: ''};
     this.contacts.push(this.contact);
   }
+
+  // sendMessage(): void {
+  //   this.userService.broadcast('testCall', 'Special Message');
+  // }
 
   /** Display a message briefly, then remove it. */
   displayMessage(msg: string) {

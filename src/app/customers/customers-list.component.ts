@@ -3,20 +3,34 @@ import { Observable } from 'rxjs';
 
 import { Customer,
          CustomersService } from './customers.service';
+import { UserService } from '../greeting/user.service';
 
 @Component({
   template: `
     <h3>Customer List</h3>
+    <p>{{message}}</p>
     <div *ngFor='let customer of customers | async'>
       <a routerLink="{{customer.id}}">{{customer.id}} - {{customer.name}}</a>
     </div>
   `
 })
 
-export class CustomersListComponent {
+export class CustomersListComponent implements OnInit {
   customers: Observable<Customer[]>;
-  constructor(private customersService: CustomersService) {
+  message = 'Nothing to see';
+
+  constructor(private customersService: CustomersService, private userService: UserService) {
     this.customers = this.customersService.getCustomers();
+  }
+
+  ngOnInit(): void {
+    console.log('OnInit list');
+
+    this.userService.on('testCall', (first, second, third) => {
+      console.log('messageReceived: ', first);
+      this.message = this.message + second;
+      console.log('third? => : ', third);
+    });
   }
 }
 
