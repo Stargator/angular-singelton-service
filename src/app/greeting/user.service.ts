@@ -30,11 +30,10 @@ export class UserService {
         ({name, args}) => {
           if (this.listeners[name]) {
               console.log('name => ', name);
-            // for (let listener of this.listeners[name]) {
-              this.listeners[name](...args);
+            for (let listener of this.listeners[name]) {
               console.log('args => ', ...args);
-              // listener();
-            // }
+              listener(...args);
+            }
           }
         });
   }
@@ -48,10 +47,10 @@ export class UserService {
   on(name: string, listener: any): void {
     console.log('subscribed');
     if (!this.listeners[name]) {
-      this.listeners[name] = null;
+      this.listeners[name] = [];
     }
 
-    this.listeners[name] = listener;
+    this.listeners[name].push(listener);
   }
 
   off(name: string, listener: any): void {
