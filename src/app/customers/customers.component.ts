@@ -8,7 +8,7 @@ import { UserService } from '../greeting/user.service';
     <h2>Customers of {{userName}}</h2>
     <router-outlet></router-outlet>
   `,
-  providers: [ UserService ]
+  // providers: [ UserService ]
 })
 export class CustomersComponent {
   userName = '';

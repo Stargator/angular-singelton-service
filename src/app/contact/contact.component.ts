@@ -22,6 +22,7 @@ export class ContactComponent implements OnInit {
   });
 
   constructor(private contactService: ContactService, userService: UserService, private fb: FormBuilder) {
+    console.log("Contact -> " + userService.userName);
     this.userName = userService.userName;
   }
 

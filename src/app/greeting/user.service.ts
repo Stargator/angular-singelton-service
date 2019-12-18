@@ -15,12 +15,13 @@ export class UserService {
   private _userName = 'Sherlock Holmes';
 
   constructor(@Optional() config: UserServiceConfig) {
-    console.log("userService created");
+    console.log('UserService instance created.');
     if (config) { this._userName = config.userName; }
   }
 
   get userName() {
     // Demo: add a suffix if this service has been created more than once
+    console.log("Sending user info");
     const suffix = this.id > 1 ? ` times ${this.id}` : '';
     return this._userName + suffix;
   }

@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     ContactModule,
-    GreetingModule.forRoot({userName: 'Miss Marple'}),
+    GreetingModule, //.forRoot({userName: 'Miss Marple'}),
     AppRoutingModule
   ],
   declarations: [

@@ -19,14 +19,14 @@ export class GreetingModule {
     }
   }
 
-  static forRoot(config: UserServiceConfig): ModuleWithProviders {
-    return {
-      ngModule: GreetingModule,
-      providers: [
-        {provide: UserServiceConfig, useValue: config }
-      ]
-    };
-  }
+  // static forRoot(config: UserServiceConfig): ModuleWithProviders {
+  //   return {
+  //     ngModule: GreetingModule,
+  //     providers: [
+  //       {provide: UserServiceConfig, useValue: config }
+  //     ]
+  //   };
+  // }
 }
 
 
